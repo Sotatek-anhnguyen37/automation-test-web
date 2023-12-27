@@ -1,0 +1,5 @@
+/target/
+/.idea/
+/testResult.json
+/allure-results/
+/allure-report/
