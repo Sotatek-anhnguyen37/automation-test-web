@@ -76,16 +76,7 @@ public class CommonPage extends BasePage {
         clickToElement(dropDownListDate);
         return this;
     }
-    @Step("check list value of drop down date")
-    public CommonPage checkListValueDate(){
-        List<String> dates = listDate.stream().map(element -> element.getLocation().toString()).toList();
-        int i = 0;
-        for (String e : dates){
-            Assert.assertEquals(e, DATE_SORT[i]);
-            i++;
-        }
-        return this;
-    }
+
     public CommonPage checkListTagTrendingDisplay(){
         for(WebElement element : listTagTrending){
             Assert.assertTrue(isDisplayElement(element));
