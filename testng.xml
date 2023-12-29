@@ -3,7 +3,7 @@
 <suite name="Blocklens Regression" verbose="1" configfailurepolicy="continue" parallel="classes">
     <test name="Blocklens Test">
         <classes>
-            <class name="tests.dashboard.DashboardListMyWorkTest"></class>
+            <class name="tests.dashboard.DashboardListMyWorkTest"/>
         </classes>
     </test>
 </suite>

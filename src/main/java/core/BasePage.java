@@ -8,17 +8,17 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class BasePage {
-    private static final int TIME_OUT = 10;
+    private static final int TIME_OUT = 1;
     private WebDriver driver;
     private WebDriverWait wait;
 
     public BasePage(WebDriver driver){
         this.driver = driver;
-        driver.manage().timeouts().implicitlyWait(TIME_OUT, TimeUnit.SECONDS);
-        wait = new WebDriverWait(driver, Duration.ofMinutes(10));
+        wait = new WebDriverWait(driver, Duration.ofMinutes(TIME_OUT));
         PageFactory.initElements(driver, this);
     }
 
@@ -37,7 +37,17 @@ public class BasePage {
         getExplicitWait().until(ExpectedConditions.visibilityOf(e));
         e.sendKeys(key);
     }
-    public void navigationTo(String url){
-        getDriver().get(url);
+    public boolean isEnableElement(WebElement e){
+        getExplicitWait().until(ExpectedConditions.visibilityOf(e));
+        return e.isEnabled();
+    }
+    public boolean isDisplayElement(WebElement e){
+        return e.isDisplayed();
+    }
+    public WebElement getElement(WebElement e){
+        return getExplicitWait().until(ExpectedConditions.visibilityOf(e));
+    }
+    public void waitUntilInvisibleElement(WebElement e){
+        getExplicitWait().until(ExpectedConditions.invisibilityOf(e));
     }
 }

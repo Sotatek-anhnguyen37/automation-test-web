@@ -15,7 +15,7 @@ public class BaseTest{
     @BeforeClass
     public void setUp(){
 //        WebDriverManager.chromedriver().setup();
-        System.setProperty("webdriver.gecko.driver", "D:\\Personal\\Project\\automation-test-web\\geckodriver.exe");
+        System.setProperty("webdriver.chrome.driver", "D:\\Personal\\Project\\automation-test-web\\chromedriver.exe");
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.get(Url.BASE_URL);
