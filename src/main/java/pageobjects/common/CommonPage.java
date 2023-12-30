@@ -5,6 +5,7 @@ import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
 import java.util.List;
@@ -38,6 +39,9 @@ public class CommonPage extends BasePage {
 
     @FindBy(xpath = "//div[contains(@class, 'dashboard-filter')]//div[contains(@class, 'chakra-collapse')]")
     private WebElement sectionFilter;
+
+    @FindBy(xpath = "//div[text()='No data...']")
+    private WebElement noData;
 
     public CommonPage(WebDriver driver){
         super(driver);
@@ -76,40 +80,55 @@ public class CommonPage extends BasePage {
         clickToElement(dropDownListDate);
         return this;
     }
-
+    @Step("check list tag trending display")
     public CommonPage checkListTagTrendingDisplay(){
         for(WebElement element : listTagTrending){
             Assert.assertTrue(isDisplayElement(element));
         }
         return this;
     }
+    @Step("check drop down list date display")
     public CommonPage checkDropdownListDateDisplay(){
         for(WebElement element : listDate){
             Assert.assertTrue(isDisplayElement(element));
         }
         return this;
     }
+    @Step("check filter section open")
     public CommonPage checkFilterSectionOpen(){
         Assert.assertTrue(getElement(sectionFilterWhenOpen).isDisplayed());
         return this;
     }
+    @Step("check section filter close")
     public CommonPage checkSectionFilterClose(){
+        getExplicitWait().until(ExpectedConditions.invisibilityOf(sectionFilterWhenOpen));
         Assert.assertFalse(sectionFilter.isDisplayed());
         return this;
     }
+    @Step("status section filter")
     public boolean statusSectionFilter(){
         return sectionFilter.isDisplayed();
     }
+    @Step("open filter section")
     public CommonPage openFilterSection(){
         if(!statusSectionFilter()) clickButtonFilter();
         return this;
     }
+    @Step("close filter section")
     public CommonPage closeFilterSection(){
         if(statusSectionFilter()) clickButtonFilter();
         return this;
     }
+    @Step("enter text box search")
     public CommonPage enterTextBoxSearch(String value){
+        searchBox.clear();
         sendKeyElement(searchBox, value);
+        return this;
+    }
+    @Step("check have not data")
+    public CommonPage checkHaveNotData() throws InterruptedException {
+        Thread.sleep(3000);
+        Assert.assertTrue(noData.isDisplayed());
         return this;
     }
 }

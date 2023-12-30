@@ -8,9 +8,11 @@ import pageobjects.common.CommonPage;
 import pageobjects.dashboardmywork.DashboardMyWorkPage;
 import pageobjects.login.LoginPage;
 
+import static constants.Constant.NAME_DASHBOARD_EXIST;
+import static constants.Constant.NAME_DASHBOARD_NOT_EXIST;
+
 
 public class DashboardListMyWorkTest extends BaseTest {
-    private String nameDashboardExist = "test_defalt_info123";
     @BeforeMethod(description = "login successfully")
     public void login(){
         LoginPage loginPage = new LoginPage(getDriver());
@@ -40,11 +42,28 @@ public class DashboardListMyWorkTest extends BaseTest {
                 .checkFilterSectionOpen()
                 .closeFilterSection()
                 .checkSectionFilterClose();
-        //check text box search
+        int numberOfDashboardMyWork = dashboardMyWorkPage.getNumberDashboard();
+        //check text box search default
         dashboardMyWorkPage.openFilterSection()
-                .checkSearchBoxEmpty()
-                .enterTextBoxSearch(nameDashboardExist);
-        dashboardMyWorkPage.checkNameListDashboard(nameDashboardExist);
-
+                .checkSearchBoxEmpty();
+        //dashboard text box search have results
+        dashboardMyWorkPage.enterTextBoxSearch(NAME_DASHBOARD_EXIST);
+        Thread.sleep(3000);
+        dashboardMyWorkPage.checkNameListDashboard(NAME_DASHBOARD_EXIST);
+        //dashboard text box search with data not exist
+        dashboardMyWorkPage.enterTextBoxSearch(NAME_DASHBOARD_NOT_EXIST)
+                .checkHaveNotData();
+        //check enter empty into search box
+        dashboardMyWorkPage.enterTextBoxSearch("");
+        Thread.sleep(2000);
+        dashboardMyWorkPage.checkDisplayAllOfDashboard(numberOfDashboardMyWork);
+        //check space empty into search box
+        dashboardMyWorkPage.enterTextBoxSearch("   ");
+        Thread.sleep(2000);
+        dashboardMyWorkPage.checkDisplayAllOfDashboard(numberOfDashboardMyWork);
+        //check name dashboard have space
+        dashboardMyWorkPage.enterTextBoxSearch("  "+ NAME_DASHBOARD_EXIST);
+        Thread.sleep(2000);
+        dashboardMyWorkPage.checkNameListDashboard(NAME_DASHBOARD_EXIST);
     }
 }

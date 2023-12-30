@@ -1,5 +1,6 @@
 package pageobjects.dashboardmywork;
 
+import com.beust.ah.A;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -67,8 +68,17 @@ public class DashboardMyWorkPage extends CommonPage {
     @Step("check name list dashboard")
     public DashboardMyWorkPage checkNameListDashboard(String name){
         for(WebElement element : listDashboardName){
-            Assert.assertTrue(element.getText().contains(name));
+            Assert.assertTrue(element.getText().toUpperCase().contains(name.toUpperCase()));
         }
+        return this;
+    }
+    @Step("get number of dashboard")
+    public int getNumberDashboard(){
+        return listDashboard.size();
+    }
+    @Step("check display all of dashboard")
+    public DashboardMyWorkPage checkDisplayAllOfDashboard(int number){
+        Assert.assertEquals(listDashboard.size(), number);
         return this;
     }
 }
