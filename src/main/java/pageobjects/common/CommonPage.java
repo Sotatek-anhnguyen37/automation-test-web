@@ -130,4 +130,9 @@ public class CommonPage extends BasePage {
         Assert.assertTrue(noData.isDisplayed());
         return this;
     }
+    @Step("check drop down list date display")
+    public CommonPage selectDateLowToHigh(){
+        clickToElement(listDate.get(0));
+        return this;
+    }
 }

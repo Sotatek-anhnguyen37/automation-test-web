@@ -1,6 +1,5 @@
 package pageobjects.dashboardmywork;
 
-import com.beust.ah.A;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,6 +9,9 @@ import pageobjects.common.CommonPage;
 import utils.RandomNumber;
 
 import java.util.List;
+
+import static constants.Constant.DATE_FORMAT;
+import static utils.FormatDate.statusOfSortDate;
 
 public class DashboardMyWorkPage extends CommonPage {
     @FindBy(xpath = "//span[text()='My Work']")
@@ -121,5 +123,17 @@ public class DashboardMyWorkPage extends CommonPage {
         doubleClick(listTagTrending.get(random));
         Thread.sleep(3000);
         checkDisplayAllOfDashboard(number);
+    }
+    @Step("check dashboard sorted high to low")
+    public void checkDashboardSortedHighToLow() {
+        for (int i =1; i < listDashboardCreateDate.size(); i++){
+            Assert.assertTrue(statusOfSortDate(listDashboardCreateDate.get(i).getText(), listDashboardCreateDate.get(i-1).getText(), DATE_FORMAT[0]));
+        }
+    }
+    @Step("check dashboard sorted low to high")
+    public void checkDashboardSortedLowToHigh() {
+        for (int i =1; i < listDashboardCreateDate.size(); i++){
+            Assert.assertFalse(statusOfSortDate(listDashboardCreateDate.get(i).getText(), listDashboardCreateDate.get(i-1).getText(), DATE_FORMAT[0]));
+        }
     }
 }

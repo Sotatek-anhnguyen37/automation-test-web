@@ -6,4 +6,5 @@ public class Constant {
     public static final String[] DATE_SORT = {"Date high to low", "Date low to high"};
     public static final String NAME_DASHBOARD_EXIST = "test_default_info123";
     public static final String NAME_DASHBOARD_NOT_EXIST = "NO-DATA-1111";
+    public static final String[] DATE_FORMAT = {"MM-dd-yyyy", "MM/dd/yyyy"};
 }
