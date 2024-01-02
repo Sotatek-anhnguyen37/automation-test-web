@@ -8,6 +8,8 @@ import pageobjects.common.CommonPage;
 import pageobjects.dashboardmywork.DashboardMyWorkPage;
 import pageobjects.login.LoginPage;
 
+import java.text.ParseException;
+
 import static constants.Constant.NAME_DASHBOARD_EXIST;
 import static constants.Constant.NAME_DASHBOARD_NOT_EXIST;
 
@@ -63,7 +65,7 @@ public class DashboardListMyWorkTest extends BaseTest {
         dashboardMyWorkPage.checkDisplayAllOfDashboard(numberOfDashboardMyWork);
         //check name dashboard have space
         dashboardMyWorkPage.enterTextBoxSearch("  "+ NAME_DASHBOARD_EXIST);
-        Thread.sleep(2000);
+        Thread.sleep(3000);
         dashboardMyWorkPage.checkNameListDashboard(NAME_DASHBOARD_EXIST);
 
         //check search tag default
@@ -73,5 +75,17 @@ public class DashboardListMyWorkTest extends BaseTest {
         //check double click to one tag
         dashboardMyWorkPage.checkDoubleClickOneTag(numberOfDashboardMyWork);
 
+        //check default value of dropdown list date
+        dashboardMyWorkPage.checkValueDefaultDropDownListDate();
+        //check click to dropdown list date
+        dashboardMyWorkPage.clickDropDownListDate()
+                .checkDropdownListDateDisplay();
+
+        //check sort by date high to low
+        dashboardMyWorkPage.checkDashboardSortedHighToLow();
+        //check sort by date low to high
+        dashboardMyWorkPage.selectDateLowToHigh();
+        Thread.sleep(3000);
+        dashboardMyWorkPage.checkDashboardSortedLowToHigh();
     }
 }
