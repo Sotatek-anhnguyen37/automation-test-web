@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 import pageobjects.common.CommonPage;
+import utils.RandomNumber;
 
 import java.util.List;
 
@@ -26,6 +27,9 @@ public class DashboardMyWorkPage extends CommonPage {
     @FindBy(xpath = "//table//div[contains(@class, 'article-row')]/a//div[contains(@class, 'article-name')]")
     private List<WebElement> listDashboardName;
 
+    @FindBy(xpath = "//table//div[contains(@class, 'article-row')]/a//p[contains(@class, 'app-tag')]")
+    private List<WebElement> listDashboardTag;
+
     @FindBy(xpath = "//table//div[contains(@class, 'article-row')]/a//p[contains(@class, 'article-creator')]")
     private List<WebElement> listDashboardCreatorName;
 
@@ -34,6 +38,15 @@ public class DashboardMyWorkPage extends CommonPage {
 
     @FindBy(xpath = "//input[contains(@class, 'dashboard-filter__search__input')]")
     private WebElement searchBox;
+
+    @FindBy(xpath = "//div[contains(@class, 'chakra-input__group')]/following-sibling::div/div/p")
+    private List<WebElement> listTagTrending;
+
+    @FindBy(xpath = "//div[text()='No data...']")
+    private WebElement noData;
+
+    @FindBy(xpath = "//button[contains(@class, 'app-tag__close-button')]")
+    private WebElement btnCloseTag;
 
     public DashboardMyWorkPage(WebDriver driver){
         super(driver);
@@ -80,5 +93,33 @@ public class DashboardMyWorkPage extends CommonPage {
     public DashboardMyWorkPage checkDisplayAllOfDashboard(int number){
         Assert.assertEquals(listDashboard.size(), number);
         return this;
+    }
+    @Step("check number of tag trending")
+    public DashboardMyWorkPage checkNumberTagTrending(){
+        Assert.assertEquals(listTagTrending.size(), 3);
+        return  this;
+    }
+    @Step("check search by one tag")
+    public DashboardMyWorkPage checkSearchByOneTag() throws InterruptedException {
+        int random  = RandomNumber.generateNumber(0, 2);
+        clickToElement(listTagTrending.get(random));
+        Thread.sleep(3000);
+        for(WebElement element : listDashboardTag){
+            if(!noData.isDisplayed()){
+                Assert.assertTrue(element.getText().contains(listTagTrending.get(random).getText()));
+            }
+        }
+        closeTagInput();
+        return this;
+    }
+    public void closeTagInput(){
+        clickToElement(btnCloseTag);
+    }
+    @Step("check double click to one tag")
+    public void checkDoubleClickOneTag(int number) throws InterruptedException {
+        int random  = RandomNumber.generateNumber(0, 2);
+        doubleClick(listTagTrending.get(random));
+        Thread.sleep(3000);
+        checkDisplayAllOfDashboard(number);
     }
 }

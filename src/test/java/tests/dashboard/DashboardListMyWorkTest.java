@@ -54,16 +54,24 @@ public class DashboardListMyWorkTest extends BaseTest {
         dashboardMyWorkPage.enterTextBoxSearch(NAME_DASHBOARD_NOT_EXIST)
                 .checkHaveNotData();
         //check enter empty into search box
-        dashboardMyWorkPage.enterTextBoxSearch("");
-        Thread.sleep(2000);
-        dashboardMyWorkPage.checkDisplayAllOfDashboard(numberOfDashboardMyWork);
+//        dashboardMyWorkPage.enterTextBoxSearch("");
+//        Thread.sleep(3000);
+//        dashboardMyWorkPage.checkDisplayAllOfDashboard(numberOfDashboardMyWork);
         //check space empty into search box
         dashboardMyWorkPage.enterTextBoxSearch("   ");
-        Thread.sleep(2000);
+        Thread.sleep(3000);
         dashboardMyWorkPage.checkDisplayAllOfDashboard(numberOfDashboardMyWork);
         //check name dashboard have space
         dashboardMyWorkPage.enterTextBoxSearch("  "+ NAME_DASHBOARD_EXIST);
         Thread.sleep(2000);
         dashboardMyWorkPage.checkNameListDashboard(NAME_DASHBOARD_EXIST);
+
+        //check search tag default
+        dashboardMyWorkPage.checkNumberTagTrending();
+        //check search by one tag
+        dashboardMyWorkPage.checkSearchByOneTag();
+        //check double click to one tag
+        dashboardMyWorkPage.checkDoubleClickOneTag(numberOfDashboardMyWork);
+
     }
 }

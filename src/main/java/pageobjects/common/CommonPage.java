@@ -121,7 +121,6 @@ public class CommonPage extends BasePage {
     }
     @Step("enter text box search")
     public CommonPage enterTextBoxSearch(String value){
-        searchBox.clear();
         sendKeyElement(searchBox, value);
         return this;
     }

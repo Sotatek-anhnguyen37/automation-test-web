@@ -1,25 +1,27 @@
 package core;
 
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class BasePage {
     private static final int TIME_OUT = 1;
     private WebDriver driver;
     private WebDriverWait wait;
+    private Actions action;
 
     public BasePage(WebDriver driver){
         this.driver = driver;
         wait = new WebDriverWait(driver, Duration.ofMinutes(TIME_OUT));
         PageFactory.initElements(driver, this);
+        action = new Actions(driver);
     }
 
     public WebDriver getDriver() {
@@ -35,7 +37,12 @@ public class BasePage {
     }
     public void sendKeyElement(WebElement e, String key){
         getExplicitWait().until(ExpectedConditions.visibilityOf(e));
+        JavascriptExecutor javascriptExecutor = (JavascriptExecutor) getDriver();
+        javascriptExecutor.executeScript("arguments[0].value='';", e);
         e.sendKeys(key);
+    }
+    public void clickEnter(WebElement e){
+        e.sendKeys(Keys.ENTER);
     }
     public boolean isEnableElement(WebElement e){
         getExplicitWait().until(ExpectedConditions.visibilityOf(e));
@@ -49,5 +56,8 @@ public class BasePage {
     }
     public void waitUntilInvisibleElement(WebElement e){
         getExplicitWait().until(ExpectedConditions.invisibilityOf(e));
+    }
+    public void doubleClick(WebElement e){
+        action.doubleClick(e).perform();
     }
 }
