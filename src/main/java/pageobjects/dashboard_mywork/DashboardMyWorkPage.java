@@ -1,4 +1,4 @@
-package pageobjects.dashboardmywork;
+package pageobjects.dashboard_mywork;
 
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;

@@ -1,12 +1,12 @@
 package pageobjects.login;
 
-import core.BasePage;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import pageobjects.common.CommonPage;
 
-public class LoginPage extends BasePage {
+public class LoginPage extends CommonPage {
     @FindBy(xpath = "//button[text()='Log In']")
     private WebElement btnLogIn;
 
@@ -48,6 +48,7 @@ public class LoginPage extends BasePage {
         this.enterEmail(email);
         this.enterPassWord(password);
         this.clickButtonLoginFromLoginPage();
+        this.closeToastMessage();
         return this;
     }
 }

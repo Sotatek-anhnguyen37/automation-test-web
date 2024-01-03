@@ -43,6 +43,15 @@ public class CommonPage extends BasePage {
     @FindBy(xpath = "//div[text()='No data...']")
     private WebElement noData;
 
+    @FindBy(xpath = "(//div[contains(@class, 'chakra-alert__desc')]/parent::div/following-sibling::button)[1]")
+    private WebElement btnCloseToastMessage;
+
+    @FindBy(xpath = "(//div[text()='Successfully']/parent::div)[1]")
+    private WebElement toastMessageSuccessfully;
+
+    @FindBy(xpath = "(//div[text()='Copied']/parent::div/div)[1]")
+    private WebElement toastMessageCopied;
+
     public CommonPage(WebDriver driver){
         super(driver);
     }
@@ -133,6 +142,23 @@ public class CommonPage extends BasePage {
     @Step("check drop down list date display")
     public CommonPage selectDateLowToHigh(){
         clickToElement(listDate.get(0));
+        return this;
+    }
+    @Step("close toast message Welcome to Blocklens")
+    public CommonPage closeToastMessage(){
+        clickToElement(btnCloseToastMessage);
+        return this;
+    }
+    @Step("verify toast message successfully display")
+    public CommonPage verifyToastMessageSuccessfullyDisplay(){
+        waitUntilInvisibleElement(toastMessageSuccessfully);
+        closeToastMessage();
+        return this;
+    }
+    @Step("verify toast message copied display")
+    public CommonPage verifyToastMessageCopiedDisplay(){
+        waitUntilInvisibleElement(toastMessageCopied);
+        closeToastMessage();
         return this;
     }
 }
