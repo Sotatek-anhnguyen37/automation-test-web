@@ -4,6 +4,7 @@
     <test name="Blocklens Test">
         <classes>
             <class name="tests.dashboard.DashboardListMyWorkTest"/>
+            <class name="tests.account_screen.CheckInformationAccountScreenTest"/>
         </classes>
     </test>
 </suite>
