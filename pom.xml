@@ -54,13 +54,6 @@
             <version>3.24.2</version>
             <scope>test</scope>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-devtools-v86 -->
-<!--        <dependency>-->
-<!--            <groupId>org.seleniumhq.selenium</groupId>-->
-<!--            <artifactId>selenium-devtools-v86</artifactId>-->
-<!--            <version>4.0.0-alpha-7</version>-->
-<!--        </dependency>-->
-
     </dependencies>
 
     <build>
