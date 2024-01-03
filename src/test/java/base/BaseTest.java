@@ -4,6 +4,7 @@ import constants.Url;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 
@@ -14,9 +15,12 @@ public class BaseTest{
     }
     @BeforeClass
     public void setUp(){
-//        WebDriverManager.chromedriver().setup();
         System.setProperty("webdriver.chrome.driver", "D:\\Personal\\Project\\automation-test-web\\chromedriver.exe");
         driver = new ChromeDriver();
+
+//        System.setProperty("webdriver.gecko.driver", "D:\\Personal\\Project\\automation-test-web\\geckodriver.exe");
+//        driver = new FirefoxDriver();
+
         driver.manage().window().maximize();
         driver.get(Url.BASE_URL);
     }

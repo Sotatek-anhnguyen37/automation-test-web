@@ -33,6 +33,7 @@ public class BasePage {
 
     public void clickToElement(WebElement e){
         getExplicitWait().until(ExpectedConditions.elementToBeClickable(e));
+        action.moveToElement(e).build().perform();
         e.click();
     }
     public void sendKeyElement(WebElement e, String key){
@@ -47,6 +48,10 @@ public class BasePage {
     public boolean isEnableElement(WebElement e){
         getExplicitWait().until(ExpectedConditions.visibilityOf(e));
         return e.isEnabled();
+    }
+    public boolean isSelectedElement(WebElement e){
+        getExplicitWait().until(ExpectedConditions.visibilityOf(e));
+        return e.isSelected();
     }
     public boolean isDisplayElement(WebElement e){
         return e.isDisplayed();

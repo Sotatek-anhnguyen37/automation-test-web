@@ -5,10 +5,8 @@ import constants.Constant;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pageobjects.common.CommonPage;
-import pageobjects.dashboardmywork.DashboardMyWorkPage;
+import pageobjects.dashboard_mywork.DashboardMyWorkPage;
 import pageobjects.login.LoginPage;
-
-import java.text.ParseException;
 
 import static constants.Constant.NAME_DASHBOARD_EXIST;
 import static constants.Constant.NAME_DASHBOARD_NOT_EXIST;
