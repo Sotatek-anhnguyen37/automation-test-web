@@ -7,7 +7,8 @@ pipeline{
     stages {
         stage('Checkout Code'){
             steps{
-                git 'https://github.com/Sotatek-anhnguyen37/automation-test-web'
+                git 'https://github.com/Sotatek-anhnguyen37/automation-test-web.git'
+
             }
         }
         stage('Compile Code'){
