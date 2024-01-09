@@ -28,10 +28,11 @@ public class CheckInformationAccountScreenTest extends BaseTest {
                 .closePopUp();
         //check when user click to check box notification
         accountScreenPage.clickCheckBoxNotification()
-                .verifyToastMessageSuccessfullyDisplay();
+                .closeToastMessage();
         //check when user click to copy api key
         accountScreenPage.clickButtonCopyApiKey()
                 .verifyToastMessageCopiedDisplay();
+        accountScreenPage.clickOurDocs();
 
     }
 }

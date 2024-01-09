@@ -6,12 +6,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 import pageobjects.common.CommonPage;
-import utils.RandomNumber;
+import utils.CommonUtil;
 
 import java.util.List;
 
 import static constants.Constant.DATE_FORMAT;
-import static utils.FormatDate.statusOfSortDate;
+import static utils.CommonUtil.statusOfSortDate;
 
 public class DashboardMyWorkPage extends CommonPage {
     @FindBy(xpath = "//span[text()='My Work']")
@@ -103,7 +103,7 @@ public class DashboardMyWorkPage extends CommonPage {
     }
     @Step("check search by one tag")
     public DashboardMyWorkPage checkSearchByOneTag() throws InterruptedException {
-        int random  = RandomNumber.generateNumber(0, 2);
+        int random  = CommonUtil.generateNumber(0, 2);
         clickToElement(listTagTrending.get(random));
         Thread.sleep(3000);
         for(WebElement element : listDashboardTag){
@@ -119,7 +119,7 @@ public class DashboardMyWorkPage extends CommonPage {
     }
     @Step("check double click to one tag")
     public void checkDoubleClickOneTag(int number) throws InterruptedException {
-        int random  = RandomNumber.generateNumber(0, 2);
+        int random  = CommonUtil.generateNumber(0, 2);
         doubleClick(listTagTrending.get(random));
         Thread.sleep(3000);
         checkDisplayAllOfDashboard(number);

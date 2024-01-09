@@ -63,6 +63,9 @@ public class AccountScreenPage extends CommonPage {
     @FindBy(xpath = "//div[contains(@class, 'modal__btn-close')]")
     private WebElement btnClosePopUp;
 
+    @FindBy(xpath = "//a[text()='Our docs.']")
+    private WebElement linkOurDocs;
+
     public AccountScreenPage(WebDriver driver){
         super(driver);
     }
@@ -130,8 +133,19 @@ public class AccountScreenPage extends CommonPage {
         return this;
     }
     @Step("click to button copy api key")
-    public AccountScreenPage clickButtonCopyApiKey() throws InterruptedException {
+    public AccountScreenPage clickButtonCopyApiKey() {
+        pressArrowDown(linkOurDocs);
+        clickToElement(btnCopyApiKey);
+        return this;
+    }
+    @Step("click to button reload api key")
+    public AccountScreenPage clickButtonReloadApiKey(){
         clickToElement(btnReloadApiKey);
+        return this;
+    }
+    @Step("click to button our docs")
+    public AccountScreenPage clickOurDocs(){
+        clickToElement(linkOurDocs);
         return this;
     }
 }

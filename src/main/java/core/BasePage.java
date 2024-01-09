@@ -1,30 +1,29 @@
 package core;
 
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import utils.WaitUtil;
 
 import java.time.Duration;
 
 public class BasePage {
     private static final int TIME_OUT = 1;
-    private WebDriver driver;
+    public static WebDriver driver;
     private WebDriverWait wait;
-    private Actions action;
+    private Actions builder;
+    private JavascriptExecutor javascriptExecutor;
 
     public BasePage(WebDriver driver){
         this.driver = driver;
         wait = new WebDriverWait(driver, Duration.ofMinutes(TIME_OUT));
         PageFactory.initElements(driver, this);
-        action = new Actions(driver);
+        builder = new Actions(driver);
+        javascriptExecutor = (JavascriptExecutor) driver;
     }
 
-    public WebDriver getDriver() {
+    public static WebDriver getDriver() {
         return driver;
     }
     public WebDriverWait getExplicitWait(){
@@ -32,13 +31,17 @@ public class BasePage {
     }
 
     public void clickToElement(WebElement e){
-        getExplicitWait().until(ExpectedConditions.elementToBeClickable(e));
-        action.moveToElement(e).build().perform();
+        WaitUtil.waitForElementClickable(e);
         e.click();
     }
+    public void pressArrowDown(WebElement element){
+        for(int i =0; i<=10; i++){
+            element.sendKeys(Keys.ARROW_DOWN);
+        }
+    }
     public void sendKeyElement(WebElement e, String key){
-        getExplicitWait().until(ExpectedConditions.visibilityOf(e));
-        JavascriptExecutor javascriptExecutor = (JavascriptExecutor) getDriver();
+        WaitUtil.waitForElementVisible(e);
+        this.javascriptExecutor = (JavascriptExecutor) getDriver();
         javascriptExecutor.executeScript("arguments[0].value='';", e);
         e.sendKeys(key);
     }
@@ -46,23 +49,17 @@ public class BasePage {
         e.sendKeys(Keys.ENTER);
     }
     public boolean isEnableElement(WebElement e){
-        getExplicitWait().until(ExpectedConditions.visibilityOf(e));
+        WaitUtil.waitForElementVisible(e);
         return e.isEnabled();
     }
     public boolean isSelectedElement(WebElement e){
-        getExplicitWait().until(ExpectedConditions.visibilityOf(e));
+        WaitUtil.waitForElementVisible(e);
         return e.isSelected();
     }
     public boolean isDisplayElement(WebElement e){
         return e.isDisplayed();
     }
-    public WebElement getElement(WebElement e){
-        return getExplicitWait().until(ExpectedConditions.visibilityOf(e));
-    }
-    public void waitUntilInvisibleElement(WebElement e){
-        getExplicitWait().until(ExpectedConditions.invisibilityOf(e));
-    }
     public void doubleClick(WebElement e){
-        action.doubleClick(e).perform();
+        builder.doubleClick(e).perform();
     }
 }
