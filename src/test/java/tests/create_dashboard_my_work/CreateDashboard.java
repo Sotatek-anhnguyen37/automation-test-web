@@ -5,6 +5,7 @@ import constants.Constant;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pageobjects.common.CommonPage;
+import pageobjects.dashboard_mywork.CreateDashboardPage;
 import pageobjects.login.LoginPage;
 
 public class CreateDashboard extends BaseTest {
@@ -15,29 +16,32 @@ public class CreateDashboard extends BaseTest {
     }
     @Test(description = "confirm initializing the screen create dashboard")
     public void ConfirmInitialScreen(){
-        CommonPage commonPage = new CommonPage(getDriver());
+        CreateDashboardPage createDashboardPage = new CreateDashboardPage(getDriver());
 
         // check information of pop up create new
-        commonPage.clickButtonCreate()
-                .checkInfoDefaultPopupCreateNew();
-        commonPage.clickOptionCreateDashboard()
+        createDashboardPage.clickButtonCreate();
+        createDashboardPage.checkInfoDefaultPopupCreateNew();
+        createDashboardPage.clickOptionCreateDashboard()
                 .checkInfoPopUpCreateDashboard();
         // check button cancel
-        commonPage.clickButtonCancel()
+        createDashboardPage.clickButtonCancel()
                 .checkPopUpCreateDashboardClosed()
                 .clickOptionCreateDashboard()
                 .checkInfoPopUpCreateDashboard();
         //check button add
-        commonPage.createNewDashboard()
+        createDashboardPage.createNewDashboard()
                 .clickButtonAddNewDashboard()
                 .checkActionClickButtonAddSuccessfully();
         //check button close
-        commonPage.clickTabInsights()
-                .clickButtonCreate()
+        createDashboardPage.clickTabInsights()
+                .clickButtonCreate();
+        createDashboardPage
                 .clickOptionCreateDashboard()
                 .clickButtonClose()
                 .checkPopUpCreateDashboardClosed()
                 .clickOptionCreateDashboard()
                 .checkInfoPopUpCreateDashboard();
+
+
     }
 }
