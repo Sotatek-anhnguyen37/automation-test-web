@@ -43,6 +43,7 @@ public class BasePage {
         WaitUtil.waitForElementVisible(e);
         this.javascriptExecutor = (JavascriptExecutor) getDriver();
         javascriptExecutor.executeScript("arguments[0].value='';", e);
+        e.clear();
         e.sendKeys(key);
     }
     public void clickEnter(WebElement e){

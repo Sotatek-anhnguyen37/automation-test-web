@@ -42,6 +42,15 @@ public class CreateDashboardPage extends CommonPage {
     @FindBy(xpath = "//ul//div[text()='Create new dashboard successfully!']")
     private WebElement toastMessageCreateNewDashboardSuccessfully;
 
+    @FindBy(xpath = "//p[text()='The dashboard title may not be greater than 150 characters.']")
+    private WebElement messageDashboardNameGreaterThan150;
+
+    @FindBy(xpath = "//p[text()='The dashboard title field is required.']")
+    private WebElement messageDashboardNameFieldRequired;
+
+    @FindBy(xpath = "//p[text()='Tags must contain not more than 3 elements']")
+    private WebElement messageTagsContainMoreThan3Elements;
+
     @FindBy(xpath = "//a[text()='Insights']")
     private WebElement tabInsights;
     public CreateDashboardPage(WebDriver driver){
@@ -81,9 +90,9 @@ public class CreateDashboardPage extends CommonPage {
         return this;
     }
     @Step("create new dashboard")
-    public CreateDashboardPage createNewDashboard(){
-        sendKeyElement(inputDashboardTitle, "aAAAAA");
-        sendKeyElement(inputTagsDashboard, "tag1");
+    public CreateDashboardPage createNewDashboard(String dashboardName, String tagName){
+        sendKeyElement(inputDashboardTitle, dashboardName);
+        sendKeyElement(inputTagsDashboard, tagName);
         return this;
     }
     @Step("click button add new dashboard")
@@ -106,5 +115,20 @@ public class CreateDashboardPage extends CommonPage {
     public CreateDashboardPage clickTabInsights(){
         clickToElement(tabInsights);
         return this;
+    }
+    @Step("check action enter invalid dashboard name")
+    public void checkActionEnterInvalidDashboardName(){
+        WaitUtil.waitForElementVisible(messageDashboardNameGreaterThan150);
+        Assert.assertFalse(isEnableElement(btnAdd));
+    }
+    @Step("check action enter dashboard title is space")
+    public void checkActionEnterSpaceIntoDashboardTitleField(){
+        WaitUtil.waitForElementVisible(messageDashboardNameFieldRequired);
+        Assert.assertFalse(isEnableElement(btnAdd));
+    }
+    @Step("check action enter invalid tags more than 3 elements")
+    public void checkActionEnterTagsMoreThan3Elements(){
+        WaitUtil.waitForElementVisible(messageTagsContainMoreThan3Elements);
+        Assert.assertFalse(isEnableElement(btnAdd));
     }
 }
