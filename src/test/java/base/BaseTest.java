@@ -15,10 +15,10 @@ public class BaseTest{
     }
     @BeforeClass
     public void setUp(){
-        System.setProperty("webdriver.chrome.driver", "D:\\Personal\\Project\\automation-test-web\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "D:\\Personal\\Project\\automation-test-web\\lib\\chromedriver.exe");
         driver = new ChromeDriver();
 
-//        System.setProperty("webdriver.gecko.driver", "D:\\Personal\\Project\\automation-test-web\\geckodriver.exe");
+//        System.setProperty("webdriver.gecko.driver", "D:\\Personal\\Project\\automation-test-web\\lib\\geckodriver.exe");
 //        driver = new FirefoxDriver();
 
         driver.manage().window().maximize();
